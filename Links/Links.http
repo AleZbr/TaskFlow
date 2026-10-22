@@ -1,0 +1,13 @@
+
+
+###
+POST http://localhost:5098/cadastro/usuario
+Content-Type: application/json
+
+{
+    "Nome": "Alexandre",
+    "Email":"AlexandreZampiergmail.com"
+}
+
+
+###
