@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.SignalR;
 
 // Projeto
 // Id
@@ -26,4 +25,7 @@ public class Tarefa
 
     public string UsuarioId{get; set; } = String.Empty;
 
+    public Projeto? Projeto { get; set; }
+
+    public Usuario? Usuario { get; set; }
 }

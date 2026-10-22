@@ -62,6 +62,7 @@ app.MapPost("/cadastrar/Projeto", ([FromBody] Projeto? projeto,[FromServices] Ap
     {
         return Results.BadRequest("Nome não pode estar vazio");
     } 
+    projeto.Nome = projeto.Nome.Trim();
     
     Projeto? nomeencontrado=
         ctx.Projetos.FirstOrDefault(x =>
