@@ -23,7 +23,7 @@ app.MapPost("/cadastro/usuario", ([FromBody] Usuario? usuario,[FromServices] App
     {
         return Results.BadRequest("Email não pode estar vazio");
     }
-    
+
     if (!new EmailAddressAttribute().IsValid(usuario.Email))
     {
     return Results.BadRequest("Email inválido");
@@ -46,6 +46,46 @@ ctx.SaveChanges();
 
     return Results.Created("",usuario);
 });
+
+
+app.MapPost("/cadastrar/Projeto", ([FromBody] Projeto? projeto,[FromServices] AppDataContext ctx) =>
+{
+// Id
+// Nome
+// Descricao
+// DataCriacao
+    if(projeto is null)
+    {
+        return Results.BadRequest("Projeto nçao pode ser nulo");
+    }
+    if (string.IsNullOrWhiteSpace(projeto.Nome))
+    {
+        return Results.BadRequest("Nome não pode estar vazio");
+    } 
+    
+    Projeto? nomeencontrado=
+        ctx.Projetos.FirstOrDefault(x =>
+        x.Nome==projeto.Nome);
+    if(nomeencontrado is not null)
+    {
+        return Results.BadRequest("Esse Nome já está em uso, escolha outro");
+    }
+    
+    if (string.IsNullOrWhiteSpace(projeto.Descricao))
+    {
+        return Results.BadRequest("Necessario colocar descrição do projeto");
+    }
+
+    
+ctx.Projetos.Add(projeto);
+ctx.SaveChanges();
+
+
+
+    return Results.Created("",projeto);
+
+});
+
 
 
 app.Run();
