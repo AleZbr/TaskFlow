@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SignalR;
 
 // Projeto
@@ -15,7 +14,7 @@ public class Projeto
     
     public string Nome{get; set; }= String.Empty;
 
-    public string Descrição{get; set; } = String.Empty;
+    public string Descricao{get; set; } = String.Empty;
 
     public DateTime CriadoEm{get; set;} =DateTime.Now;
 

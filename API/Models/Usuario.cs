@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SignalR;
 
 
@@ -9,7 +8,7 @@ using Microsoft.AspNetCore.SignalR;
 
 
 
-public class Usuário
+public class Usuario
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     
