@@ -1,0 +1,30 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.SignalR;
+
+// Projeto
+// Id
+// Nome
+// Descricao
+// DataCriacao
+
+
+
+public class Tarefa
+{
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+    
+    public string Titulo{get; set; }= String.Empty;
+
+    public string Descrição{get; set; } = String.Empty;
+
+    public string Status{get; set; } = String.Empty;
+
+    public string Prioridade{get; set; } = String.Empty;
+
+    public string DataLimite{get; set; } = String.Empty;
+
+    public string ProjetoId{get; set; } = String.Empty;
+
+    public string UsuarioId{get; set; } = String.Empty;
+
+}
