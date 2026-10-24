@@ -56,3 +56,15 @@ Content-Type: application/json
     "Nome": "Criação Task Flow - Atualizado",
     "Descricao":"Criação do trabalho de c# - Atualizado"
 }
+
+
+### AlTERA TAREFA
+PUT http://localhost:5098/alterar/tarefa/19e913f2-1461-47f0-8b22-b5aa98153e40
+Content-Type: application/json
+
+{
+    "Titulo": "Aprender C# - Atualizado",
+    "Descrição": "Estudar para a prova - Atualizado",
+    "Status": "Concluída",
+    "Prioridade": "Média"
+}

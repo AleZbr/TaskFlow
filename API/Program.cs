@@ -224,5 +224,49 @@ app.MapPut("/alterar/Projeto/{id}", ([FromRoute] string id, [FromBody] Projeto? 
     return Results.Ok(projetoencontrado);
 });
 
+app.MapPut("/alterar/tarefa/{id}", ([FromRoute] string id, [FromBody] Tarefa? tarefa, [FromServices] AppDataContext ctx) =>
+{
+    if (tarefa is null)
+    {
+        return Results.BadRequest("A tarefa não pode ser nula.");
+    }
+
+    Tarefa? tarefaencontrada = 
+    ctx.Tarefas.FirstOrDefault(x =>
+    x.Id == id);
+
+    if (tarefaencontrada is null)
+    {
+        return Results.NotFound("Tarefa não encontrada.");
+    }
+
+    if (string.IsNullOrWhiteSpace(tarefa.Titulo))
+    {
+        return Results.BadRequest("O título da tarefa não pode estar vazio.");
+    }
+
+    if (string.IsNullOrWhiteSpace(tarefa.Descrição))
+    {
+        return Results.BadRequest("A descrição da tarefa não pode estar vazia.");
+    }
+
+    tarefaencontrada.Titulo = tarefa.Titulo.Trim();
+    tarefaencontrada.Descrição = tarefa.Descrição.Trim();
+
+    ctx.SaveChanges();
+
+    return Results.Ok(new
+    {
+    tarefaencontrada.Id,
+    tarefaencontrada.Titulo,
+    tarefaencontrada.Descrição,
+    tarefaencontrada.Status,
+    tarefaencontrada.Prioridade,
+    tarefaencontrada.DataLimite,
+    tarefaencontrada.ProjetoId,
+    tarefaencontrada.UsuarioId
+    });
+});
+
 app.Run();
 
