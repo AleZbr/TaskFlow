@@ -252,6 +252,9 @@ app.MapPut("/alterar/tarefa/{id}", ([FromRoute] string id, [FromBody] Tarefa? ta
 
     tarefaencontrada.Titulo = tarefa.Titulo.Trim();
     tarefaencontrada.Descrição = tarefa.Descrição.Trim();
+    tarefaencontrada.Status = tarefa.Status;
+    tarefaencontrada.Prioridade = tarefa.Prioridade;
+    tarefaencontrada.DataLimite = tarefa.DataLimite;
 
     ctx.SaveChanges();
 
@@ -262,9 +265,7 @@ app.MapPut("/alterar/tarefa/{id}", ([FromRoute] string id, [FromBody] Tarefa? ta
     tarefaencontrada.Descrição,
     tarefaencontrada.Status,
     tarefaencontrada.Prioridade,
-    tarefaencontrada.DataLimite,
-    tarefaencontrada.ProjetoId,
-    tarefaencontrada.UsuarioId
+    tarefaencontrada.DataLimite
     });
 });
 

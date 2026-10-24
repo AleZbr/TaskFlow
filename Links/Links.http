@@ -22,10 +22,11 @@ POST http://localhost:5098/cadastrar/tarefa
 Content-Type: application/json
 
 {
-    "Titulo": "Aprender C#",
+    "Titulo": "Aprender C# - Teste",
     "Descrição": "Estudar para a prova",
     "Status": "Pendente",
     "Prioridade": "Alta",
+    "DataLimite": "2026-10-24T20:30:00",
     "ProjetoId": "b5d7c197-288e-4830-9f3a-b0ef57447f37",
     "UsuarioId": "51528e2c-cdc4-4871-ad0c-112dce7e74e5"
 }
@@ -59,12 +60,13 @@ Content-Type: application/json
 
 
 ### AlTERA TAREFA
-PUT http://localhost:5098/alterar/tarefa/19e913f2-1461-47f0-8b22-b5aa98153e40
+PUT http://localhost:5098/alterar/tarefa/3c2aca91-9dd3-4ba7-ba05-738ebe2e7e5a
 Content-Type: application/json
 
 {
     "Titulo": "Aprender C# - Atualizado",
     "Descrição": "Estudar para a prova - Atualizado",
     "Status": "Concluída",
-    "Prioridade": "Média"
+    "Prioridade": "Média",
+    "DataLimite": "2026-10-25T21:30:00"
 }
