@@ -348,7 +348,7 @@ app.MapGet("/buscar/projeto/{id?}", ([FromRoute] string? id, [FromServices] AppD
     }
 
     
-    return Results.BadRequest(projetoencontrado);
+    return Results.Ok(projetoencontrado);
 });
 
 
@@ -366,7 +366,7 @@ app.MapGet("/buscar/usuario/{id?}", ([FromRoute] string? id, [FromServices] AppD
 
     if (usuarioencontrado is null)
     {
-       return Results.BadRequest("usuario não envontrado");
+      return Results.NotFound("usuario não envontrado");
     }
 
     return Results.Ok(usuarioencontrado);
@@ -388,7 +388,7 @@ app.MapGet("/buscar/tarefa/{id?}", ([FromRoute] string? id, [FromServices] AppDa
     
     if (tarefaencontrada is null)
     {
-       return Results.BadRequest("tarefa não encontrada");
+       return Results.NotFound("tarefa não encontrada");
     }
 
     return Results.Ok(tarefaencontrada);
