@@ -395,6 +395,44 @@ app.MapGet("/buscar/tarefa/{id?}", ([FromRoute] string? id, [FromServices] AppDa
 });
 
 
+app.MapGet("/progresso/projeto/{id?}",
+    ([FromRoute] string? id, [FromServices] AppDataContext ctx) =>
+{
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Insira um ID");
+    }
+
+    Projeto? projetoencontrado = ctx.Projetos
+        .FirstOrDefault(x => x.Id == id);
+
+    if (projetoencontrado is null)
+    {
+        return Results.NotFound("Projeto não encontrado");
+    }
+
+    int totalTarefas = ctx.Tarefas.Count(x =>
+        x.ProjetoId == id);
+
+    int tarefasConcluidas = ctx.Tarefas.Count(x =>
+        x.ProjetoId == id && x.Status == "Concluída");
+
+    double progresso = 0;
+
+    if (totalTarefas > 0)
+    {
+        progresso = tarefasConcluidas * 100.0 / totalTarefas;
+    }
+
+    return Results.Ok(new
+    {
+        ProjetoId = projetoencontrado.Id,
+        ProjetoNome = projetoencontrado.Nome,
+        TotalTarefas = totalTarefas,
+        TarefasConcluidas = tarefasConcluidas,
+        Progresso = Math.Round(progresso, 2)
+    });
+});
 
 
 

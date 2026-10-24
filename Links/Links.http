@@ -91,3 +91,6 @@ GET http://localhost:5098/buscar/usuario/51528e2c-cdc4-4871-ad0c-112dce7e74e5
 
 ###Procura tarefa
 GET http://localhost:5098/buscar/tarefa/5abec643-ec5e-4247-99c5-f929f0964db8
+
+### PROGRESSO DO PROJETO
+GET http://localhost:5098/progresso/projeto/b5d7c197-288e-4830-9f3a-b0ef57447f37
