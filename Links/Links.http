@@ -6,12 +6,8 @@ Content-Type: application/json
 
 {
     "Nome": "Alexandre",
-    "Email":"AlexandreZampiergmail.com"
+    "Email":"AlexandreZampier@gmail.com"
 }
-
-
-
-
 
 ###
 POST http://localhost:5098/cadastrar/Projeto
@@ -20,4 +16,17 @@ Content-Type: application/json
 {
     "Nome": "Criação Task Flow",
     "Descricao":"Criação do trabalho de c#"
+}
+
+###
+POST http://localhost:5098/cadastrar/tarefa
+Content-Type: application/json
+
+{
+    "Titulo": "Aprender C#",
+    "Descrição": "Estudar para a prova",
+    "Status": "Pendente",
+    "Prioridade": "Alta",
+    "ProjetoId": "ID_DO_PROJETO",
+    "UsuarioId": "ID_DO_USUARIO"
 }

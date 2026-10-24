@@ -87,6 +87,40 @@ ctx.SaveChanges();
 
 });
 
+app.MapPost("/cadastrar/tarefa", ([FromBody] Tarefa? tarefa, [FromServices] AppDataContext ctx) =>
+{
+    if (tarefa is null)
+    {
+        return Results.BadRequest("A tarefa não pode ser nula");
+    }
+    if (string.IsNullOrWhiteSpace(tarefa.Titulo))
+    {
+        return Results.BadRequest("Título não pode estar vazio");
+    }
+    tarefa.Titulo = tarefa.Titulo.Trim();
 
+    Tarefa? tituloencontrado =
+        ctx.Tarefas.FirstOrDefault(x =>
+        x.Titulo == tarefa.Titulo);
+
+    if (tituloencontrado is not null)
+    {
+        return Results.BadRequest("Esse título já está em uso, escolha outro");
+    }
+
+    if (string.IsNullOrWhiteSpace(tarefa.ProjetoId) || !ctx.Projetos.Any(x => x.Id == tarefa.ProjetoId))
+    {
+        return Results.BadRequest("Projeto não encontrado");
+    }
+    if (string.IsNullOrWhiteSpace(tarefa.UsuarioId) || !ctx.Usuarios.Any(x => x.Id == tarefa.UsuarioId))
+    {
+        return Results.BadRequest("Usuário não encontrado");
+    }
+
+    ctx.Tarefas.Add(tarefa);
+    ctx.SaveChanges();
+
+    return Results.Created("", tarefa);
+});
 
 app.Run();
