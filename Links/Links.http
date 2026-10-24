@@ -22,7 +22,7 @@ POST http://localhost:5098/cadastrar/tarefa
 Content-Type: application/json
 
 {
-    "Titulo": "Aprender C# - Teste",
+    "Titulo": "teste delete",
     "Descrição": "Estudar para a prova",
     "Status": "Pendente",
     "Prioridade": "Alta",
@@ -70,3 +70,9 @@ Content-Type: application/json
     "Prioridade": "Média",
     "DataLimite": "2026-10-25T21:30:00"
 }
+
+
+
+
+### Deletar Tarefa
+DELETE http://localhost:5098/deletar/tarefa/

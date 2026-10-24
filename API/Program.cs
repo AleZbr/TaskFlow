@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 
@@ -125,12 +126,23 @@ app.MapPost("/cadastrar/tarefa", ([FromBody] Tarefa? tarefa, [FromServices] AppD
 });
 
 app.MapGet("/listar/usuario", ([FromServices] AppDataContext ctx) =>
-{
+{   
+    if (ctx.Usuarios.Count() == 0)
+    {
+        return Results.NotFound("Nenhum Usuario Cadastrado");
+    }
+
+
     return Results.Ok(ctx.Usuarios.ToList());
 });
 
 app.MapGet("/listar/Projeto", ([FromServices] AppDataContext ctx) =>
 {
+    if (ctx.Projetos.Count() == 0)
+    {
+        return Results.NotFound("Nenhum Projeto Cadastrado");
+    }
+
     return Results.Ok(ctx.Projetos.ToList());
 });
 
@@ -268,6 +280,36 @@ app.MapPut("/alterar/tarefa/{id}", ([FromRoute] string id, [FromBody] Tarefa? ta
     tarefaencontrada.DataLimite
     });
 });
+
+
+app.MapDelete("/deletar/tarefa/{id?}",([FromRoute]string? id, [FromServices] AppDataContext ctx) =>
+{
+    
+
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Não existem tarefas na URL");
+    }
+
+    
+    Tarefa?tarefaencontrada = ctx.Tarefas.FirstOrDefault(x=> x.Id == id);
+    if (tarefaencontrada is null)
+    {
+        return Results.NotFound("Tarefa não existe");
+    }
+    ctx.Tarefas.Remove(tarefaencontrada);
+    ctx.SaveChanges();
+    return Results.Ok(tarefaencontrada);
+
+    
+
+});
+
+
+
+
+
+
 
 app.Run();
 
