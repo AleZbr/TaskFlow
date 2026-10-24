@@ -32,6 +32,7 @@ app.MapPost("/cadastro/usuario", ([FromBody] Usuario? usuario,[FromServices] App
     Usuario? emailencontrado =
         ctx.Usuarios.FirstOrDefault(x =>
             x.Email == usuario.Email );
+
     if (emailencontrado is not null)
     {
         return Results.BadRequest("Esse email já esta em uso");
@@ -46,7 +47,6 @@ ctx.SaveChanges();
 
     return Results.Created("",usuario);
 });
-
 
 app.MapPost("/cadastrar/Projeto", ([FromBody] Projeto? projeto,[FromServices] AppDataContext ctx) =>
 {
@@ -67,6 +67,7 @@ app.MapPost("/cadastrar/Projeto", ([FromBody] Projeto? projeto,[FromServices] Ap
     Projeto? nomeencontrado=
         ctx.Projetos.FirstOrDefault(x =>
         x.Nome==projeto.Nome);
+
     if(nomeencontrado is not null)
     {
         return Results.BadRequest("Esse Nome já está em uso, escolha outro");
@@ -123,4 +124,37 @@ app.MapPost("/cadastrar/tarefa", ([FromBody] Tarefa? tarefa, [FromServices] AppD
     return Results.Created("", tarefa);
 });
 
+app.MapGet("/listar/usuario", ([FromServices] AppDataContext ctx) =>
+{
+    return Results.Ok(ctx.Usuarios.ToList());
+});
+
+app.MapGet("/listar/Projeto", ([FromServices] AppDataContext ctx) =>
+{
+    return Results.Ok(ctx.Projetos.ToList());
+});
+
+app.MapGet("/listar/tarefa", ([FromServices] AppDataContext ctx) =>
+{
+    var tarefas = ctx.Tarefas.Select(x => new
+    {
+        x.Id,
+        x.Titulo,
+        x.Descrição,
+        x.Status,
+        x.Prioridade,
+        x.DataLimite,
+        x.ProjetoId,
+        x.UsuarioId
+    }).ToList();
+
+    if (tarefas.Count == 0)
+    {
+        return Results.NotFound("Nenhuma tarefa cadastrada.");
+    }
+
+    return Results.Ok(tarefas);
+});
+
 app.Run();
+

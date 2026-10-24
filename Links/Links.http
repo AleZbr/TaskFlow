@@ -27,6 +27,15 @@ Content-Type: application/json
     "Descrição": "Estudar para a prova",
     "Status": "Pendente",
     "Prioridade": "Alta",
-    "ProjetoId": "ID_DO_PROJETO",
-    "UsuarioId": "ID_DO_USUARIO"
+    "ProjetoId": "b5d7c197-288e-4830-9f3a-b0ef57447f37",
+    "UsuarioId": "51528e2c-cdc4-4871-ad0c-112dce7e74e5"
 }
+
+###
+GET http://localhost:5098/listar/usuario
+
+###
+GET http://localhost:5098/listar/Projeto
+
+###
+GET http://localhost:5098/listar/tarefa
