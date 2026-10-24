@@ -44,6 +44,15 @@ PUT http://localhost:5098/alterar/usuario/692303a4-c91c-43eb-bc1a-d6d58394f6bf
 Content-Type: application/json
 
 {
-    "Nome": "",
+    "Nome": "Erick",
     "Email": "erick@gmail.com"
+}
+
+### ALTERA PROJETO
+PUT http://localhost:5098/alterar/Projeto/b5d7c197-288e-4830-9f3a-b0ef57447f37
+Content-Type: application/json
+
+{
+    "Nome": "Criação Task Flow - Atualizado",
+    "Descricao":"Criação do trabalho de c# - Atualizado"
 }

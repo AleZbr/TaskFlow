@@ -190,5 +190,39 @@ app.MapPut("/alterar/usuario/{id}", ([FromRoute] string id, [FromBody] Usuario? 
     return Results.Ok(usuarioencontrado);
 });
 
+app.MapPut("/alterar/Projeto/{id}", ([FromRoute] string id, [FromBody] Projeto? projeto, [FromServices] AppDataContext ctx) =>
+{
+    if (projeto is null)
+    {
+        return Results.BadRequest("O projeto não pode ser nulo.");
+    }
+
+    Projeto? projetoencontrado= 
+    ctx.Projetos.FirstOrDefault(x =>
+    x.Id == id);
+
+    if (projetoencontrado is null)
+    {
+        return Results.NotFound("Projeto não encontrado.");
+    }
+
+    if (string.IsNullOrWhiteSpace(projeto.Nome))
+    {
+        return Results.BadRequest("O nome do projeto não pode estar vazio.");
+    }
+
+    if (string.IsNullOrWhiteSpace(projeto.Descricao))
+    {
+        return Results.BadRequest("A descrição do projeto não pode estar vazia.");
+    }
+
+    projetoencontrado.Nome = projeto.Nome.Trim();
+    projetoencontrado.Descricao = projeto.Descricao.Trim();
+
+    ctx.SaveChanges();
+
+    return Results.Ok(projetoencontrado);
+});
+
 app.Run();
 
