@@ -76,3 +76,8 @@ Content-Type: application/json
 
 ### Deletar Tarefa
 DELETE http://localhost:5098/deletar/tarefa/
+
+
+
+###Deleta usuario
+DELETE http://localhost:5098/deletar/usuaruio/c2ae8da3-a35e-4936-8ff2-15a47c9eacc5

@@ -305,6 +305,29 @@ app.MapDelete("/deletar/tarefa/{id?}",([FromRoute]string? id, [FromServices] App
 
 });
 
+app.MapDelete("/deletar/usuaruio/{id?}",([FromRoute]string? id, [FromServices] AppDataContext ctx) =>
+{
+    
+
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Não existem usuarios na URL");
+    }
+
+    
+    Usuario?usuarioencontrado = ctx.Usuarios.FirstOrDefault(x=> x.Id == id);
+    if (usuarioencontrado is null)
+    {
+        return Results.NotFound("Usuario não existe");
+    }
+    ctx.Usuarios.Remove(usuarioencontrado);
+    ctx.SaveChanges();
+    return Results.Ok(usuarioencontrado);
+
+    
+
+});
+
 
 
 
