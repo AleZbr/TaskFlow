@@ -156,5 +156,39 @@ app.MapGet("/listar/tarefa", ([FromServices] AppDataContext ctx) =>
     return Results.Ok(tarefas);
 });
 
+app.MapPut("/alterar/usuario/{id}", ([FromRoute] string id, [FromBody] Usuario? usuario, [FromServices] AppDataContext ctx) =>
+{
+    if (usuario is null)
+    {
+        return Results.BadRequest("O usuário não pode ser nulo.");
+    }
+
+    Usuario? usuarioencontrado= 
+    ctx.Usuarios.FirstOrDefault(x =>
+    x.Id == id);
+
+    if (usuarioencontrado is null)
+    {
+        return Results.NotFound("Usuário não encontrado.");
+    }
+
+    if (string.IsNullOrWhiteSpace(usuario.Nome))
+    {
+        return Results.BadRequest("O nome do usuário não pode estar vazio.");
+    }
+
+    if (string.IsNullOrWhiteSpace(usuario.Email))
+    {
+        return Results.BadRequest("O email não pode estar vazio.");
+    }
+
+    usuarioencontrado.Nome = usuario.Nome.Trim();
+    usuarioencontrado.Email = usuario.Email.Trim();
+
+    ctx.SaveChanges();
+
+    return Results.Ok(usuarioencontrado);
+});
+
 app.Run();
 

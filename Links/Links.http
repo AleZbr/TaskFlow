@@ -1,6 +1,5 @@
 
-
-###
+### CADASTRA USUARIO
 POST http://localhost:5098/cadastro/usuario
 Content-Type: application/json
 
@@ -9,7 +8,7 @@ Content-Type: application/json
     "Email":"AlexandreZampier@gmail.com"
 }
 
-###
+### CADASTRA PROJETO
 POST http://localhost:5098/cadastrar/Projeto
 Content-Type: application/json
 
@@ -18,7 +17,7 @@ Content-Type: application/json
     "Descricao":"Criação do trabalho de c#"
 }
 
-###
+### CADASTRA TAREFA
 POST http://localhost:5098/cadastrar/tarefa
 Content-Type: application/json
 
@@ -31,11 +30,20 @@ Content-Type: application/json
     "UsuarioId": "51528e2c-cdc4-4871-ad0c-112dce7e74e5"
 }
 
-###
+### LISTA USUARIO
 GET http://localhost:5098/listar/usuario
 
-###
+### LISTA PROJETO
 GET http://localhost:5098/listar/Projeto
 
-###
+### LISTA TAREFA
 GET http://localhost:5098/listar/tarefa
+
+### ALTERA USUARIO
+PUT http://localhost:5098/alterar/usuario/692303a4-c91c-43eb-bc1a-d6d58394f6bf
+Content-Type: application/json
+
+{
+    "Nome": "",
+    "Email": "erick@gmail.com"
+}
