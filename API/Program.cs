@@ -157,7 +157,9 @@ app.MapGet("/listar/tarefa", ([FromServices] AppDataContext ctx) =>
         x.Prioridade,
         x.DataLimite,
         x.ProjetoId,
-        x.UsuarioId
+        x.UsuarioId,
+        Projeto = x.Projeto,
+        Usuario = x.Usuario
     }).ToList();
 
     if (tarefas.Count == 0)
@@ -326,6 +328,70 @@ app.MapDelete("/deletar/usuaruio/{id?}",([FromRoute]string? id, [FromServices] A
 
     
 
+});
+
+
+app.MapGet("/buscar/projeto/{id?}", ([FromRoute] string? id, [FromServices] AppDataContext ctx) =>
+{
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Insira um ID");
+    }
+
+
+    Projeto? projetoencontrado = 
+    ctx.Projetos.FirstOrDefault(x => x.Id == id);
+
+    if (projetoencontrado is null)
+    {
+        return Results.NotFound("Projeto não encontrado");
+    }
+
+    
+    return Results.BadRequest(projetoencontrado);
+});
+
+
+
+app.MapGet("/buscar/usuario/{id?}", ([FromRoute] string? id, [FromServices] AppDataContext ctx) =>
+{
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Insira um ID");
+    }
+
+
+    Usuario? usuarioencontrado = 
+    ctx.Usuarios.FirstOrDefault(x => x.Id == id);
+
+    if (usuarioencontrado is null)
+    {
+       return Results.BadRequest("usuario não envontrado");
+    }
+
+    return Results.Ok(usuarioencontrado);
+});
+
+
+
+app.MapGet("/buscar/tarefa/{id?}", ([FromRoute] string? id, [FromServices] AppDataContext ctx) =>
+{
+    if (string.IsNullOrWhiteSpace(id))
+    {
+        return Results.BadRequest("Insira um ID");
+    }
+
+    Tarefa? tarefaencontrada = ctx.Tarefas
+        .Include(x => x.Projeto)
+        .Include(x => x.Usuario)
+        .FirstOrDefault(x => x.Id == id);
+    
+    if (tarefaencontrada is null)
+    {
+       return Results.BadRequest("tarefa não encontrada");
+    }
+
+    return Results.Ok(tarefaencontrada);
 });
 
 
