@@ -80,7 +80,7 @@ DELETE http://localhost:5098/deletar/tarefa/
 
 
 ###Deleta usuario
-DELETE http://localhost:5098/deletar/usuaruio/c2ae8da3-a35e-4936-8ff2-15a47c9eacc5
+DELETE http://localhost:5098/deletar/usuario/c2ae8da3-a35e-4936-8ff2-15a47c9eacc5
 
 ###Procura Projeto
 GET http://localhost:5098/buscar/projeto/b5d7c197-288e-4830-9f3a-b0ef57447f37

@@ -307,7 +307,7 @@ app.MapDelete("/deletar/tarefa/{id?}",([FromRoute]string? id, [FromServices] App
 
 });
 
-app.MapDelete("/deletar/usuaruio/{id?}",([FromRoute]string? id, [FromServices] AppDataContext ctx) =>
+app.MapDelete("/deletar/usuario/{id?}",([FromRoute]string? id, [FromServices] AppDataContext ctx) =>
 {
     
 
