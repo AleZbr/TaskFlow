@@ -138,9 +138,8 @@ Entre as solicitações realizadas à ferramenta estão:
 - Comparação de projetos considerando possíveis expansões futuras.
 - Planejamento das funcionalidades de um gerenciador de tarefas.
 - Elaboração da documentação inicial seguindo o enunciado da disciplina.
-
-### Revisões realizadas
-
-A documentação deverá ser revisada pelos integrantes para verificar sua adequação aos requisitos do professor, ajustar as funcionalidades ao escopo definido pela equipe e garantir que as informações correspondam ao sistema efetivamente desenvolvido.
-
-O conteúdo será atualizado conforme o projeto avançar.
+- Verificação do funcionamento do GET de tarefas e das respostas da API.
+- Análise e correção de campos nulos no JSON retornado.
+- Apoio na implementação do PUT para atualização de tarefas por ID.
+- Correção e validação de requisições HTTP no arquivo `Links.http`.
+- Verificação da atualização dos campos e do salvamento no banco de dados.
