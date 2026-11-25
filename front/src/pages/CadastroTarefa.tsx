@@ -63,6 +63,8 @@ function CadastroTarefa() {
       usuarioId: 0,
       projetoId: 0
     });
+    
+    setEditando(false);
   }
 
   return (
@@ -110,7 +112,9 @@ function CadastroTarefa() {
           <option value="Alta">Alta</option>
         </select>
 
-        <button type="submit">Cadastrar tarefa</button>
+        <button type="submit">
+          {editando ? "Salvar alterações" : "Cadastrar tarefa"}
+        </button>
       </form>
 
       <ListaTarefas
