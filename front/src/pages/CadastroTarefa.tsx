@@ -5,10 +5,6 @@ import ListaTarefas from "./ListaTarefas";
 function CadastroTarefa() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
-  function excluirTarefa(id: number) {
-    setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
-  }
-
   const [tarefa, setTarefa] = useState<Tarefa>({
     id: 0,
     titulo: "",
@@ -20,15 +16,42 @@ function CadastroTarefa() {
     projetoId: 0
   });
 
+  const [editando, setEditando] = useState(false);
+
+  function excluirTarefa(id: number) {
+    setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
+  }
+
+  function editarTarefa(id: number) {
+    const tarefaSelecionada = tarefas.find(
+      (tarefa) => tarefa.id === id
+    );
+
+    if (tarefaSelecionada) {
+      setTarefa(tarefaSelecionada);
+      setEditando(true);
+    }
+  }
+
   function cadastrarTarefa(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+  if (editando) {
+    setTarefas(
+      tarefas.map((item) =>
+        item.id === tarefa.id ? tarefa : item
+      )
+    );
+
+    setEditando(false);
+  } else {
     const novaTarefa: Tarefa = {
       ...tarefa,
       id: Date.now()
     };
 
     setTarefas([...tarefas, novaTarefa]);
+  }
 
     setTarefa({
       id: 0,
@@ -93,6 +116,7 @@ function CadastroTarefa() {
       <ListaTarefas
       tarefas={tarefas}
       excluirTarefa={excluirTarefa}
+      editarTarefa={editarTarefa}
       />
 
     </div>
