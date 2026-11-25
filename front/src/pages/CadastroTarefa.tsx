@@ -5,6 +5,10 @@ import ListaTarefas from "./ListaTarefas";
 function CadastroTarefa() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
+  function excluirTarefa(id: number) {
+    setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
+  }
+
   const [tarefa, setTarefa] = useState<Tarefa>({
     id: 0,
     titulo: "",
@@ -86,7 +90,10 @@ function CadastroTarefa() {
         <button type="submit">Cadastrar tarefa</button>
       </form>
 
-      <ListaTarefas tarefas={tarefas} />
+      <ListaTarefas
+      tarefas={tarefas}
+      excluirTarefa={excluirTarefa}
+      />
 
     </div>
   );

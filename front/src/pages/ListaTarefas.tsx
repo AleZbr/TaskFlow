@@ -1,12 +1,12 @@
-
 import React from "react";
 import { Tarefa } from "../types/Tarefa";
 
 interface ListaTarefasProps {
   tarefas: Tarefa[];
+  excluirTarefa: (id: number) => void;
 }
 
-function ListaTarefas({ tarefas }: ListaTarefasProps) {
+function ListaTarefas({ tarefas, excluirTarefa }: ListaTarefasProps) {
   return (
     <div>
       <h2>Lista de Tarefas</h2>
@@ -21,6 +21,10 @@ function ListaTarefas({ tarefas }: ListaTarefasProps) {
             <p>Prazo: {tarefa.prazo}</p>
             <p>Prioridade: {tarefa.prioridade}</p>
             <p>Status: {tarefa.status}</p>
+
+            <button onClick={() => excluirTarefa(tarefa.id)}>
+            Excluir
+            </button>
           </div>
         ))
       )}
