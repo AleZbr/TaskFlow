@@ -1,13 +1,241 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f3f6fb;
+  color: #243247;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* CONTAINER PRINCIPAL */
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* CABEÇALHO */
+
+.app-header {
+  margin-bottom: 30px;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: #2563eb;
+  font-size: 36px;
+}
+
+.app-header p {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* MENU DE NAVEGAÇÃO */
+
+.app-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.app-menu button {
+  padding: 12px 24px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: white;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.app-menu button:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.app-menu button.ativo {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* ÁREA DE CONTEÚDO */
+
+.app-conteudo {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+  overflow-x: auto;
+}
+
+.app-conteudo h2 {
+  margin-top: 0;
+  color: #1e293b;
+  font-size: 23px;
+}
+
+.app-conteudo h3 {
+  color: #334155;
+}
+
+/* FORMULÁRIOS */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: 600;
+  color: #334155;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  color: #1e293b;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* BOTÕES */
+
+.app-conteudo button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.app-conteudo button:hover {
+  background: #1d4ed8;
+}
+
+.app-conteudo button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* TABELAS */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+th {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+td {
+  color: #334155;
+}
+
+tr:hover td {
+  background: #f8fafc;
+}
+
+/* BARRA DE PROGRESSO */
+
+progress {
+  width: 100%;
+  height: 22px;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  accent-color: #2563eb;
+}
+
+progress::-webkit-progress-bar {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background: #2563eb;
+  border-radius: 10px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 700px) {
+  .app-container {
+    padding: 20px 12px;
+  }
+
+  .app-header h1 {
+    font-size: 28px;
+  }
+
+  .app-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .app-menu button {
+    padding: 12px;
+  }
+
+  .app-conteudo {
+    padding: 18px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 13px;
+  }
 }

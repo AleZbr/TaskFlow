@@ -7,26 +7,19 @@ import CadastrarProjeto from "./CadastrarProjeto";
 import ListarProjetos from "./ListarProjetos";
 import ProgressoProjeto from "./ProgressoProjeto";
 
-function PainelAlexandre() {
-  const [pagina, setPagina] = useState("usuarios");
+type Pagina = "usuarios" | "projetos" | "progresso";
+
+interface Props {
+  pagina: Pagina;
+}
+
+function PainelAlexandre({ pagina }: Props) {
+
   const [atualizarUsuarios, setAtualizarUsuarios] = useState(0);
   const [atualizarProjetos, setAtualizarProjetos] = useState(0);
 
   return (
-    <div>
-      <nav>
-        <button onClick={() => setPagina("usuarios")}>
-          Usuários
-        </button>
-
-        <button onClick={() => setPagina("projetos")}>
-          Projetos
-        </button>
-
-        <button onClick={() => setPagina("progresso")}>
-          Progresso
-        </button>
-      </nav>
+    <div className="painel-alexandre">
 
       {pagina === "usuarios" && (
         <div>
@@ -55,6 +48,7 @@ function PainelAlexandre() {
       {pagina === "progresso" && (
         <ProgressoProjeto atualizar={atualizarProjetos} />
       )}
+
     </div>
   );
 }
