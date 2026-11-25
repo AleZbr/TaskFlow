@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Tarefa } from "../types/Tarefa";
 
 function CadastroTarefa() {
+  const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+
   const [tarefa, setTarefa] = useState<Tarefa>({
-    id: 1,
+    id: 0,
     titulo: "",
     descricao: "",
     status: "Pendente",
@@ -14,14 +16,37 @@ function CadastroTarefa() {
     projetoId: 0
   });
 
+  function cadastrarTarefa(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const novaTarefa: Tarefa = {
+      ...tarefa,
+      id: Date.now()
+    };
+
+    setTarefas([...tarefas, novaTarefa]);
+
+    setTarefa({
+      id: 0,
+      titulo: "",
+      descricao: "",
+      status: "Pendente",
+      prioridade: "Media",
+      prazo: "",
+      usuarioId: 0,
+      projetoId: 0
+    });
+  }
+
   return (
     <div>
       <h2>Cadastro de Tarefa</h2>
 
-      <form>
+      <form onSubmit={cadastrarTarefa}>
         <label>Título:</label>
         <input
           type="text"
+          required
           value={tarefa.titulo}
           onChange={(e) =>
             setTarefa({ ...tarefa, titulo: e.target.value })
@@ -39,6 +64,7 @@ function CadastroTarefa() {
         <label>Prazo:</label>
         <input
           type="date"
+          required
           value={tarefa.prazo}
           onChange={(e) =>
             setTarefa({ ...tarefa, prazo: e.target.value })
@@ -59,6 +85,22 @@ function CadastroTarefa() {
 
         <button type="submit">Cadastrar tarefa</button>
       </form>
+
+      <h2>Tarefas cadastradas</h2>
+
+      {tarefas.length === 0 ? (
+        <p>Nenhuma tarefa cadastrada.</p>
+      ) : (
+        tarefas.map((item) => (
+          <div key={item.id}>
+            <h3>{item.titulo}</h3>
+            <p>{item.descricao}</p>
+            <p>Prazo: {item.prazo}</p>
+            <p>Prioridade: {item.prioridade}</p>
+            <p>Status: {item.status}</p>
+          </div>
+        ))
+      )}
     </div>
   );
 }
