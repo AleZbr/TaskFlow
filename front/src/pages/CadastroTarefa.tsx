@@ -1,6 +1,6 @@
-
 import React, { useState } from "react";
 import { Tarefa } from "../types/Tarefa";
+import ListaTarefas from "./ListaTarefas";
 
 function CadastroTarefa() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
@@ -86,21 +86,8 @@ function CadastroTarefa() {
         <button type="submit">Cadastrar tarefa</button>
       </form>
 
-      <h2>Tarefas cadastradas</h2>
+      <ListaTarefas tarefas={tarefas} />
 
-      {tarefas.length === 0 ? (
-        <p>Nenhuma tarefa cadastrada.</p>
-      ) : (
-        tarefas.map((item) => (
-          <div key={item.id}>
-            <h3>{item.titulo}</h3>
-            <p>{item.descricao}</p>
-            <p>Prazo: {item.prazo}</p>
-            <p>Prioridade: {item.prioridade}</p>
-            <p>Status: {item.status}</p>
-          </div>
-        ))
-      )}
     </div>
   );
 }
