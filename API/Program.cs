@@ -7,7 +7,21 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AcessoReact", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors("AcessoReact");
 
 app.MapPost("/cadastro/usuario", ([FromBody] Usuario? usuario,[FromServices] AppDataContext ctx) =>
 {
