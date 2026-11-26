@@ -3,11 +3,15 @@ import { Tarefa } from "../types/Tarefa";
 
 interface ListaTarefasProps {
   tarefas: Tarefa[];
-  excluirTarefa: (id: number) => void;
-  editarTarefa: (id: number) => void;
+  excluirTarefa: (id: string) => void;
+  editarTarefa: (id: string) => void;
 }
 
-function ListaTarefas({ tarefas, excluirTarefa, editarTarefa }: ListaTarefasProps) {
+function ListaTarefas({
+  tarefas,
+  excluirTarefa,
+  editarTarefa
+}: ListaTarefasProps) {
   return (
     <div>
       <h2>Lista de Tarefas</h2>
@@ -23,12 +27,12 @@ function ListaTarefas({ tarefas, excluirTarefa, editarTarefa }: ListaTarefasProp
             <p>Prioridade: {tarefa.prioridade}</p>
             <p>Status: {tarefa.status}</p>
 
-            <button onClick={() => excluirTarefa(tarefa.id)}>
-            Excluir
-            </button>
-            
             <button onClick={() => editarTarefa(tarefa.id)}>
-            Editar
+              Editar
+            </button>
+
+            <button onClick={() => excluirTarefa(tarefa.id)}>
+              Excluir
             </button>
           </div>
         ))

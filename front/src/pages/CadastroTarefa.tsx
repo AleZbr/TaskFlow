@@ -6,23 +6,25 @@ function CadastroTarefa() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
   const [tarefa, setTarefa] = useState<Tarefa>({
-    id: 0,
+    id: "",
     titulo: "",
     descricao: "",
     status: "Pendente",
     prioridade: "Media",
     prazo: "",
-    usuarioId: 0,
-    projetoId: 0
+    usuarioId: "",
+    projetoId: ""
   });
 
   const [editando, setEditando] = useState(false);
 
-  function excluirTarefa(id: number) {
-    setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
+  function excluirTarefa(id: string) {
+    setTarefas(
+      tarefas.filter((tarefa) => tarefa.id !== id)
+    );
   }
 
-  function editarTarefa(id: number) {
+  function editarTarefa(id: string) {
     const tarefaSelecionada = tarefas.find(
       (tarefa) => tarefa.id === id
     );
@@ -33,37 +35,37 @@ function CadastroTarefa() {
     }
   }
 
-  function cadastrarTarefa(e: React.FormEvent<HTMLFormElement>) {
+  function cadastrarTarefa(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
-  if (editando) {
-    setTarefas(
-      tarefas.map((item) =>
-        item.id === tarefa.id ? tarefa : item
-      )
-    );
+    if (editando) {
+      setTarefas(
+        tarefas.map((item) =>
+          item.id === tarefa.id ? tarefa : item
+        )
+      );
+    } else {
+      const novaTarefa: Tarefa = {
+        ...tarefa,
+        id: Date.now().toString()
+      };
 
-    setEditando(false);
-  } else {
-    const novaTarefa: Tarefa = {
-      ...tarefa,
-      id: Date.now()
-    };
-
-    setTarefas([...tarefas, novaTarefa]);
-  }
+      setTarefas([...tarefas, novaTarefa]);
+    }
 
     setTarefa({
-      id: 0,
+      id: "",
       titulo: "",
       descricao: "",
       status: "Pendente",
       prioridade: "Media",
       prazo: "",
-      usuarioId: 0,
-      projetoId: 0
+      usuarioId: "",
+      projetoId: ""
     });
-    
+
     setEditando(false);
   }
 
@@ -78,7 +80,10 @@ function CadastroTarefa() {
           required
           value={tarefa.titulo}
           onChange={(e) =>
-            setTarefa({ ...tarefa, titulo: e.target.value })
+            setTarefa({
+              ...tarefa,
+              titulo: e.target.value
+            })
           }
         />
 
@@ -86,7 +91,10 @@ function CadastroTarefa() {
         <textarea
           value={tarefa.descricao}
           onChange={(e) =>
-            setTarefa({ ...tarefa, descricao: e.target.value })
+            setTarefa({
+              ...tarefa,
+              descricao: e.target.value
+            })
           }
         />
 
@@ -96,7 +104,10 @@ function CadastroTarefa() {
           required
           value={tarefa.prazo}
           onChange={(e) =>
-            setTarefa({ ...tarefa, prazo: e.target.value })
+            setTarefa({
+              ...tarefa,
+              prazo: e.target.value
+            })
           }
         />
 
@@ -104,7 +115,10 @@ function CadastroTarefa() {
         <select
           value={tarefa.prioridade}
           onChange={(e) =>
-            setTarefa({ ...tarefa, prioridade: e.target.value })
+            setTarefa({
+              ...tarefa,
+              prioridade: e.target.value
+            })
           }
         >
           <option value="Baixa">Baixa</option>
@@ -113,16 +127,17 @@ function CadastroTarefa() {
         </select>
 
         <button type="submit">
-          {editando ? "Salvar alterações" : "Cadastrar tarefa"}
+          {editando
+            ? "Salvar alterações"
+            : "Cadastrar tarefa"}
         </button>
       </form>
 
       <ListaTarefas
-      tarefas={tarefas}
-      excluirTarefa={excluirTarefa}
-      editarTarefa={editarTarefa}
+        tarefas={tarefas}
+        excluirTarefa={excluirTarefa}
+        editarTarefa={editarTarefa}
       />
-
     </div>
   );
 }
