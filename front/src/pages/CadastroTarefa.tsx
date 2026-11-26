@@ -292,6 +292,21 @@ function CadastroTarefa() {
           <option value="Alta">Alta</option>
         </select>
 
+        <label>Status:</label>
+        <select
+          value={tarefa.status}
+          onChange={(e) =>
+            setTarefa({
+              ...tarefa,
+              status: e.target.value
+            })
+          }
+        >
+          <option value="Pendente">Pendente</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Concluída">Concluída</option>
+        </select>
+
         <label>Usuário:</label>
         <select
           required
